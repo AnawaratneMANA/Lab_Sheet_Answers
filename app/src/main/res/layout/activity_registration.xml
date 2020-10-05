@@ -87,7 +87,7 @@
         app:layout_constraintVertical_bias="0.2" />
 
     <RadioButton
-        android:id="@+id/btnTeacher"
+        android:id="@+id/btnStudent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
