@@ -61,9 +61,9 @@ public class Registration extends AppCompatActivity {
                 password = Password.getText().toString();
 
                 //Getting the selected button
-                if(radio_Teacher.isSelected()){
+                if(radio_Teacher.isChecked()){
                     selected = 0;
-                } else if(radio_Student.isSelected()){
+                } else if(radio_Student.isChecked()){
                     selected = 1;
                 }
 

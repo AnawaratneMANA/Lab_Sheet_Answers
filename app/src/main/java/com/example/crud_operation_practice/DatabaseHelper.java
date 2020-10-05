@@ -1,6 +1,7 @@
 package com.example.crud_operation_practice;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -61,5 +62,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
             return false;
         }
+    }
+
+    //Create method to read all names in the database.
+    public Cursor readAllUsers(){
+        //Database Instance
+        SQLiteDatabase db = getWritableDatabase();
+        String sql = "SELECT * " +
+                " FROM " + USER_TABLE;
+        //Execute the query
+        Cursor data = db.rawQuery(sql, null);
+        //return
+        return data;
     }
 }
