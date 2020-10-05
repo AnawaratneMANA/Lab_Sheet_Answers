@@ -52,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        //Droping tables on upgrade
+        //Dropping tables on upgrade
         sqLiteDatabase.execSQL(DROP_USER_TABLE_QUERY);
         sqLiteDatabase.execSQL(DROP_SUBJECT_MESSAGE_TABLE_QUERY);
         onCreate(sqLiteDatabase);
