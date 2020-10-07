@@ -1,6 +1,7 @@
 package com.example.crud_operation_practice;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,12 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         holder.parent_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Clicking method is working" + headings.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Item Clicked " + headings.get(position), Toast.LENGTH_SHORT).show();
+                //Creating an Intent and pass the values to the viewing activity.
+                Intent inten = new Intent(context, EditUpdateSubjects.class);
+                inten.putExtra("subject", headings.get(position));
+                inten.putExtra("description", descriptions.get(position));
+                context.startActivity(inten);
             }
         });
     }
