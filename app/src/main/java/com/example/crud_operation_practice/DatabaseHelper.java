@@ -111,4 +111,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
     }
+    //Create a method to get Subject and message information.
+    public Cursor getAllSubAndMessages(){
+        //Database Instance
+        SQLiteDatabase db = getWritableDatabase();
+        //Query
+        String sql = "SELECT * FROM " + SUBJECT_MESSAGE_TABLE;
+        //Execute the query
+        Cursor data = db.rawQuery(sql, null);
+        //Return
+        return data;
+    }
 }

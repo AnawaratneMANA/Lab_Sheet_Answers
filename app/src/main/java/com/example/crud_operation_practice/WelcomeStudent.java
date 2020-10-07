@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.database.Cursor;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,9 @@ import android.widget.ListView;
 import com.example.crud_operation_practice.RecycleViewAdapter;
 
 import java.util.ArrayList;
+
+import static com.example.crud_operation_practice.Subject.subject_table.MESSAGE_NAME;
+import static com.example.crud_operation_practice.Subject.subject_table.SUBJECT_NAME;
 
 public class WelcomeStudent extends AppCompatActivity {
 
@@ -31,10 +35,15 @@ public class WelcomeStudent extends AppCompatActivity {
 
     //Method
     private void initHeadingDesBind(){
-        //Database calling method should be here.\
-        for(int i = 0; i<10; i++){
-            headings.add("Sample" + i);
-            descriptions.add("Sample" + i+2);
+        //Database calling method should be here.
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        //Getting all subject details.
+        Cursor object = databaseHelper.getAllSubAndMessages();
+        while(object.moveToNext()){
+            headings.add(object.getString(object.getColumnIndex(SUBJECT_NAME)));
+            //System.out.println(object.getString(object.getColumnIndex(SUBJECT_NAME)));
+            descriptions.add(object.getString(object.getColumnIndex(MESSAGE_NAME)));
+            //System.out.println(object.getString(object.getColumnIndex(MESSAGE_NAME)));
         }
         intiRecyclerView();
     }
