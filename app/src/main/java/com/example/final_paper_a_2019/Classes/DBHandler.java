@@ -6,6 +6,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -28,9 +29,9 @@ import static com.example.final_paper_a_2019.Classes.DatabaseMaster.Users.userna
 public class DBHandler extends SQLiteOpenHelper {
 
     //Creating List
-    ArrayList<String> movies =  new ArrayList<String>();;
-    ArrayList<String> years = new ArrayList<String>();;
-    ArrayList<String> comments = new ArrayList<String>();;
+    ArrayList<String> movies;
+    ArrayList<String> years = new ArrayList<String>();
+    ArrayList<String> comments;
 
     //Getters
     public ArrayList getMovies() {
@@ -173,6 +174,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public void viewMovies(){
+        movies = new ArrayList<String>();
         //SQL
         String SQL = "SELECT * FROM " + movie_table;
         Cursor data = getReadableDatabase().rawQuery(SQL, null);
@@ -183,6 +185,61 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-    //public boolean insertComments(){}
+    public boolean insertComments(String moviename, int rating, String comment){
+        moviename = "'" + moviename+"'";
+        comment = "'" + comment+"'";
+
+        //SQL - Inserting Method - I
+        long return_value = -1;
+        try{
+            String SQL = "INSERT INTO " + comment_table + " ( "
+                    + comment_movie_name + ", " +
+                    comment_rating + ", " +
+                    comment_comments + " ) VALUES ( " + moviename + ", " + rating + ", " + comment +" )";
+            SQLiteStatement statement = getWritableDatabase().compileStatement(SQL);
+            return_value = statement.executeInsert();
+            if(return_value > 0){
+                return true;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
+    //method to show comment details
+    public double viewComments(String movie_name){
+        comments = new ArrayList<String>();
+        movie_name = "'" + movie_name+"'";
+        System.out.println("--------------------------------------" + movie_name);
+
+        //SQL
+        String SQL = "SELECT * FROM " + comment_table + " WHERE " + comment_movie_name + " = " + movie_name;
+        String SQL2 = "SELECT SUM( " + comment_rating + " ) AS total FROM " + comment_table + " WHERE " + comment_movie_name + " = " + movie_name;
+
+        //Execute
+        Cursor data1 = getReadableDatabase().rawQuery(SQL, null);
+        Cursor data2 = getReadableDatabase().rawQuery(SQL2, null);
+
+        //While loop to add details to the ArrayList
+        double count = 0;
+        while(data1.moveToNext()){
+            comments.add(data1.getString(data1.getColumnIndex(comment_comments)));
+            count++;
+        }
+
+        //Create the Average Rating
+        data2.moveToNext();
+        int total = 0;
+        double average = 0;
+        try{
+            total = Integer.parseInt(data2.getString(data2.getColumnIndex("total")));
+            average = total / count;
+        } catch (java.lang.NumberFormatException e){
+            e.printStackTrace();
+        }
+        return average;
+    }
 
 }

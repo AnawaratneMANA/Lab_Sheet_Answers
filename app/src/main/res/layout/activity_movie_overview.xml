@@ -44,11 +44,13 @@
         android:paddingLeft="10dp"/>
 
     <EditText
+        android:id="@+id/comment"
         android:layout_width="390dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         />
     <Button
+        android:id="@+id/btn_submit"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,6 +64,7 @@
         android:paddingLeft="20dp"/>
 
     <TextView
+        android:id="@+id/rating_average"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
