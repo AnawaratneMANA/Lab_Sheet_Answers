@@ -17,6 +17,7 @@
         android:text="@string/movies"/>
 
     <TextView
+        android:id="@+id/progress_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/rules"
@@ -26,8 +27,13 @@
 
     <!-- Modify the scroll bar with sections -->
     <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:id="@+id/rating_bar"
+        android:layout_gravity="center_horizontal"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:max="10" />
 
     <TextView
         android:layout_width="match_parent"

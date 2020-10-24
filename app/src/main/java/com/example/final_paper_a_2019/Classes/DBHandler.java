@@ -183,4 +183,6 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
+    //public boolean insertComments(){}
+
 }
