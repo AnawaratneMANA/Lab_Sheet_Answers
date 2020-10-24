@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Final_Paper_A_2019</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+    <string name="admin_panel">Admin Panel</string>
+    <string name="add">ADD</string>
+    <string name="movies">Movies</string>
+    <string name="rules">Rules</string>
+    <string name="comments">Comments</string>
+    <string name="submit">SUBMIT</string>
+</resources>

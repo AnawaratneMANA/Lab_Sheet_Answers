@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activites.AddMovie"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:text="@string/admin_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:id="@+id/admin_text_header"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/moviename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:hint="Movie Name "
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"/>
+
+    <EditText
+        android:id="@+id/movieyear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Movie Year"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"/>
+
+    <ImageView
+        android:id="@+id/moviePoster"
+        android:layout_width="165dp"
+        android:layout_height="218dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/movie_poster" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:text="@string/add"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
