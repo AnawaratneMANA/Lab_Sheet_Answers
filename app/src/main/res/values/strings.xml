@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Final_Paper_B_2019</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="admin_panel">Admin Panel</string>
+    <string name="add">Add</string>
+</resources>
