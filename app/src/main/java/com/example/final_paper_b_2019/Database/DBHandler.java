@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
+
+    ArrayList<String> comments;
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Database.db";
@@ -66,7 +68,7 @@ public class DBHandler extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void registerUser(String username, String password){
+    public boolean registerUser(String username, String password){
         // Gets the data repository in write mode
         SQLiteDatabase db = getWritableDatabase();
 
@@ -74,10 +76,15 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(DatabaseManager.Users.COLUMN_NAME_1_1, username);
         values.put(DatabaseManager.Users.COLUMN_NAME_1_2, password);
-        values.put(DatabaseManager.Users.COLUMN_NAME_1_3, "normal");
+        //values.put(DatabaseManager.Users.COLUMN_NAME_1_3, "'normal'");
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(DatabaseManager.Users.TABLE_NAME_1, null, values);
+        if(newRowId > 0){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public int loginUser(String username, String password){
@@ -101,11 +108,15 @@ public class DBHandler extends SQLiteOpenHelper {
             if(username.contentEquals(cursor.getString(cursor.getColumnIndex(DatabaseManager.Users.COLUMN_NAME_1_1)))){
                 if(password.contentEquals(cursor.getString(cursor.getColumnIndex(DatabaseManager.Users.COLUMN_NAME_1_2)))){
                     flag = 1;
+                    break;
                 } else {
                     flag = 2;
+                    break;
                 }
             }
         }
+
+
 
         return flag;
     }
@@ -169,7 +180,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public ArrayList<String> viewComments(String game_name){
         SQLiteDatabase db = getReadableDatabase();
-        ArrayList<String> comments = new ArrayList<>();
+        comments = new ArrayList<>();
 
         // Filter results WHERE "title" = 'My Title'
         String selection = DatabaseManager.Comments.COLUMN_NAME_3_1 + " = ?";
@@ -190,5 +201,32 @@ public class DBHandler extends SQLiteOpenHelper {
         }
 
         return comments;
+    }
+    public double getCurrentRating(String game_name){
+
+        SQLiteDatabase db = getReadableDatabase();
+        comments = new ArrayList<>();
+
+        // Filter results WHERE "title" = 'My Title'
+        String selection = DatabaseManager.Comments.COLUMN_NAME_3_1 + " = ?";
+        String[] selectionArgs = { game_name };
+
+        Cursor cursor = db.query(
+                DatabaseManager.Comments.TABLE_NAME_3,   // The table to query
+                null,             // The array of columns to return (pass null to get all)
+                selection,              // The columns for the WHERE clause
+                selectionArgs,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                null               // The sort order
+        );
+        double count = 0;
+        double count_loop = 0;
+        while(cursor.moveToNext()){
+            count = count + Double.parseDouble(cursor.getString(cursor.getColumnIndex(DatabaseManager.Comments.COLUMN_NAME_3_2)));
+            count_loop++;
+        }
+
+        return count/count_loop;
     }
 }

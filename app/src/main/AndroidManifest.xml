@@ -12,7 +12,13 @@
         <activity android:name=".GameOverview"></activity>
         <activity android:name=".GameList" />
         <activity android:name=".AddGame" />
-        <activity android:name=".Main" />
+        <activity android:name=".Main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

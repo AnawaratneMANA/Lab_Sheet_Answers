@@ -51,7 +51,7 @@
         android:text="Current Rating" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/current_rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="0" />
@@ -63,6 +63,7 @@
         android:text="Comments" />
 
     <ListView
+        android:id="@+id/layout_2"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
